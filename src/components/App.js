@@ -147,10 +147,13 @@ function App()
 
 	const handleState = (e) =>{
 		setState(e.target.value);
+		setCity(0);
+		setLand(0);
 	}
 
 	const handleCity=(e)=>{
 		setCity(e.target.value);
+		setLand(0);
 	};
 
 	const handleLand = (e)=>{
@@ -160,22 +163,20 @@ function App()
 
 	return (
 	<div id="main">
-		<select id="state" value={stateVal} onChange={handleState}>
-			{states.map((item, index)=>{
-				return<option value={index}>{item.name}</option>
-			})}
+		<select id="state"  onChange={handleState}>
+			{states.map(({name}, index)=>
+				<option value={index}>{name}</option>)}
 		</select>
 
-		<select id="city" value={cityVal} onChange={handleCity}>
-			{states[stateVal].city.map((item, index)=>{
-				return<option value={index}>{item.name}</option>
-			})}
+		<select id="city" onChange={handleCity}>
+			{states[stateVal].city.map((item, index)=>
+				<option value={index}>{item.name}</option>)}
 		</select>
 
-		<select id="landmark" value={landVal} onChange={handleLand}>
-			{states[stateVal].city[cityVal].landmarks.map((item, index)=>{
-				return <option value={index}>{item.name}</option>
-			})}
+		<select id="landmark" onChange={handleLand}>
+			{states[stateVal].city[cityVal].landmarks.map((item, index)=>
+				 <option value={index}>{item.name}</option>
+			)}
 		</select>
 
 		<div id="state-tittle">{states[stateVal].name}</div>
@@ -192,9 +193,7 @@ function App()
 
 		<div id="landmark-description">
 			{states[stateVal].city[cityVal].landmarks[landVal].description}
-		</div>
-
-		
+		</div>	
 	</div>
 	);
 }
